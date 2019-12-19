@@ -17,8 +17,8 @@
 FROM codait/max-base:v1.1.3
 
 # Fill in these with a link to the bucket containing the model and the model file name
-# ARG model_bucket=
-# ARG model_file=
+ARG model_bucket=https://max-assets-dev.s3.us-south.cloud-object-storage.appdomain.cloud/max-demo/1.0.0
+ARG model_file=assets.tar.gz
 
 WORKDIR /workspace
 

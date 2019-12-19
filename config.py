@@ -27,5 +27,19 @@ API_DESC = 'An API for serving models'
 API_VERSION = '0.1'
 
 # default model
-MODEL_NAME = ''
+MODEL_NAME = 'fashion_mnist.h5'
 DEFAULT_MODEL_PATH = 'assets/{}'.format(MODEL_NAME)
+
+# used in the prediction post-processing
+CLASS_DIGIT_TO_LABEL = {
+  0: "T-shirt/top",
+  1: "Trouser",
+  2: "Pullover",
+  3: "Dress",
+  4: "Coat",
+  5: "Sandal",
+  6: "Shirt",
+  7: "Sneaker",
+  8: "Bag",
+  9: "Ankle boot"
+}
