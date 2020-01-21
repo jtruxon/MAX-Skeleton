@@ -14,12 +14,14 @@
 # limitations under the License.
 #
 
+import os
+
 # Flask settings
 DEBUG = False
 
 # Flask-restplus settings
 RESTPLUS_MASK_SWAGGER = False
-SWAGGER_UI_DOC_EXPANSION = 'none'
+SWAGGER_UI_DOC_EXPANSION = 'list'
 
 # API metadata
 API_TITLE = 'MAX'
@@ -28,18 +30,19 @@ API_VERSION = '0.1'
 
 # default model
 MODEL_NAME = 'fashion_mnist.h5'
-DEFAULT_MODEL_PATH = 'assets/{}'.format(MODEL_NAME)
+# DEFAULT_MODEL_PATH = 'assets/{}'.format(MODEL_NAME)
+TFHUB_MODULE_URL = os.environ["TFHUB_MODULE_URL"]
 
-# used in the prediction post-processing
-CLASS_DIGIT_TO_LABEL = {
-  0: "T-shirt/top",
-  1: "Trouser",
-  2: "Pullover",
-  3: "Dress",
-  4: "Coat",
-  5: "Sandal",
-  6: "Shirt",
-  7: "Sneaker",
-  8: "Bag",
-  9: "Ankle boot"
-}
+# # used in the prediction post-processing
+# CLASS_DIGIT_TO_LABEL = {
+#   0: "T-shirt/top",
+#   1: "Trouser",
+#   2: "Pullover",
+#   3: "Dress",
+#   4: "Coat",
+#   5: "Sandal",
+#   6: "Shirt",
+#   7: "Sneaker",
+#   8: "Bag",
+#   9: "Ankle boot"
+# }

@@ -26,6 +26,7 @@ input_parser.add_argument('file', type=FileStorage, location='files', required=T
 
 
 # Creating a JSON response model: https://flask-restplus.readthedocs.io/en/stable/marshalling.html#the-api-model-factory
+#---------------
 label_prediction = MAX_API.model('LabelPrediction', {
     'prediction': fields.String(required=True),
     'probability': fields.Float(required=True)
@@ -36,6 +37,17 @@ predict_response = MAX_API.model('ModelPredictResponse', {
     'predictions': fields.List(fields.Nested(label_prediction), description='Predicted labels and probabilities')
 })
 
+#---------------
+embedding_prediction = MAX_API.model('EmbeddingVector', {
+    'item': fields.String(required=True),
+    'embeddingVector': fields.List(fields.Float(required=True))
+})
+
+embedding_response = MAX_API.model('ModelEmbeddingResponse', {
+    'status': fields.String(required=True, description='Response status message'),
+    'embeddings': fields.List(fields.Nested(embedding_prediction), description='Item embedding vectors')
+})
+
 
 class ModelPredictAPI(PredictAPI):
 
@@ -43,7 +55,7 @@ class ModelPredictAPI(PredictAPI):
 
     @MAX_API.doc('predict')
     @MAX_API.expect(input_parser)
-    @MAX_API.marshal_with(predict_response)
+    @MAX_API.marshal_with(embedding_response)
     def post(self):
         """Make a prediction given input data"""
         result = {'status': 'error'}
@@ -54,7 +66,7 @@ class ModelPredictAPI(PredictAPI):
 
         # Modify this code if the schema is changed
         #label_preds = [{'label_id': p[0], 'label': p[1], 'probability': p[2]} for p in [x for x in preds]]
-        result['predictions'] = preds
+        result['embeddings'] = preds
         result['status'] = 'ok'
 
         return result
